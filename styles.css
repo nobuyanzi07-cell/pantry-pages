@@ -8,6 +8,13 @@ body {
     line-height: 1.6;   
 }
 
+/* Headings Styling */
+h1, h2, h3 {
+    font-weight: 650;
+    margin-bottom: 0.5em;
+    color: #ffdd57;
+}
+
 /* Header and footer Styling */
 header, footer {
     background: linear-gradient(135deg, #6a11cb,#2575fc);
@@ -31,8 +38,9 @@ nav a {
     border-bottom: 2px solid transparent;
 }
 
-nav a:hover {
-    color: #ffdd57;
+nav a:hover,
+nav a[aria-current="page"]{
+    color: #ffffff;
     border-bottom: 2px solid #ffdd57;
 }
 
@@ -46,14 +54,56 @@ main {
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Recipe Card Styling */
-.recipe-card {
-    background: #f8f9fa;
-    border-radius: 8px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+/* Form Styling */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+label {
+    font-weight: 500;
+    color: #34495e;
+}
+input, textarea, select {
+    padding: 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s ease;
+}
 
+button {
+    padding: 0.8em 1.2em;
+    background: linear-gradient(135deg, #2575fc, #6a11cb);
+    color: #ffffff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+button:hover {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+}
+
+/*List*/
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 0.5em;
+}
+
+/* Accessibility */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    top: auto;
+    left: -9999px;
 }
 
 /* Responsive Design */
