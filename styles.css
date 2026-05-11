@@ -16,3 +16,17 @@ header, footer {
     padding: 1.5em;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
+
+/8 Navigation Styling */
+nav { 
+    margin-top: 10px
+}
+
+nav a { 
+    margin: 0 15 px;
+    color: #ffdd57;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease, border-bottom 0.3s ease;
+    border-bottom: 2px solid transparent;
+}
