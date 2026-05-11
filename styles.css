@@ -30,3 +30,8 @@ nav a {
     transition: color 0.3s ease, border-bottom 0.3s ease;
     border-bottom: 2px solid transparent;
 }
+
+nav a:hover {
+    color: #ffdd57;
+    border-bottom: 2px solid #ffdd57;
+}
