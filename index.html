@@ -10,6 +10,7 @@
 
 <body>
     <header>
+        <h1>Pantry Pages Home Page</h1>
         <nav>
             <a href="index.html">Gallery Home</a>
             <a href="add.html">Add Recipe</a>
@@ -18,9 +19,12 @@
     </header>
     <main>
         <section>
-            <h1>Recipe Gallery</h1>
+            <h2>Recipe Gallery</h2>
+            <label for="filterInput" class="visually-hidden">Filter by ingredient</label>
             <input type="text" id="filterInput" placeholder="Filter by ingredient">
             <div id="recipeList"></div>
+                <ul id="recipes"></ul>
+            </div>
         </section>
     </main>
 
