@@ -35,3 +35,14 @@ nav a:hover {
     color: #ffdd57;
     border-bottom: 2px solid #ffdd57;
 }
+
+/* Main Content Styling */
+main { 
+    padding: 30px;
+    max-width: 900px;
+    margin: auto;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
