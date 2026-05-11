@@ -7,3 +7,12 @@ body {
     padding: 0;
     font-family: 'Roboto', Arial, sans-serif;
 }
+
+/* Header and footer Styling */
+header, footer {
+    background: linear-gradient(135deg, #6a11cb,#2575fc);
+    color: #ffffff;
+    text-align: center;
+    padding: 1.5em;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
