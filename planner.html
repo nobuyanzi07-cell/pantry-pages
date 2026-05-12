@@ -1,81 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meal Planner - PantryPages</title>
-  <link rel="stylesheet" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meal Planner</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 
 <body>
-  <header>
-    <h1>Meal Planner</h1>
-    <nav>
-      <a href="index.html">Gallery Home</a>
-      <a href="add.html">Add Recipe</a>
-      <a href="planner.html">Meal Planner</a>
-    </nav>
-  </header>
+    <header>
+        <h1>My Meal Planner</h1>
+        <nav>
+            <a href="index.html">Gallery Home</a>
+            <a href="add.html">Add Recipe</a>
+            <a href="planner.html">Meal Planner</a>
+        </nav>
+    </header>
 
-  <main>
-    <section>
-      <h2>Plan Your Week</h2>
 
-      <!-- Weekly grid scaffold -->
-      <div id="mealPlan">
-        <div class="day">
-          <h3>Monday</h3>
-          <ul>
-            <li>Breakfast: <span id="monday-breakfast"></span></li>
-            <li>Lunch: <span id="monday-lunch"></span></li>
-            <li>Dinner: <span id="monday-dinner"></span></li>
-          </ul>
-        </div>
-        <div class="day">
-          <h3>Tuesday</h3>
-          <ul>
-            <li>Breakfast: <span id="tuesday-breakfast"></span></li>
-            <li>Lunch: <span id="tuesday-lunch"></span></li>
-            <li>Dinner: <span id="tuesday-dinner"></span></li>
-          </ul>
-        </div>
-        <!-- Repeat for other days of the week -->
-      </div>
+    <main>
+        <section>
+            <h2>Plan your week</h2>
 
-      <!-- Form for adding meals -->
-      <form id="addMealForm">
-        <label for="day">Day:</label>
-        <select id="day" name="day">
-          <option>Monday</option>
-          <option>Tuesday</option>
-          <option>Wednesday</option>
-          <option>Thursday</option>
-          <option>Friday</option>
-          <option>Saturday</option>
-          <option>Sunday</option>
-        </select>
+            <!-- Week grid scaffold -->  
+             <div id="mealPlan">
+                <div class="day">
+                    <h3>Monday</h3>
+                    <ul>
+                        <li>Breakfast: <span id="monday-breakfast"></span></li>
+                        <li>Lunch: <span id="monday-lunch"></span></li>
+                        <li>Dinner: <span id="monday-dinner"></span></li>
+                    </ul>
+                </div>
+                <div class="day">
+                    <h3>Tuesday</h3>
+                    <ul>
+                        <li>Breakfast: <span id="tuesday-breakfast"></span></li>
+                        <li>Lunch: <span id="tuesday-lunch"></span></li>
+                        <li>Dinner: <span id="tuesday-dinner"></span></li>
+                    </ul>
+                </div>
+                <!--Repeat for the other days of the week -->
+            </div>
 
-        <label for="mealType">Meal:</label>
-        <select id="mealType" name="mealType">
-          <option>Breakfast</option>
-          <option>Lunch</option>
-          <option>Dinner</option>
-        </select>
+            <!--Form for Adding meals-->
+            <form id="addMealForm">
+                <label for="day">Day:</label>
+                <select id="day" name="day" required>
+                    <option value="monday">Monday</option>
+                    <option value="tuesday">Tuesday</option>
+                    <option value="wednesday">Wednesday</option>
+                    <option value="thursday">Thursday</option>
+                    <option value="friday">Friday</option>
+                    <option value="saturday">Saturday</option>
+                    <option value="sunday">Sunday</option>
+                </select>
 
-        <label for="mealName">Recipe:</label>
-        <input type="text" id="mealName" name="mealName" placeholder="Enter recipe name">
+                <label for="mealType">Meal Type:</label>
+                <select id="mealType" name="mealType" required>
+                    <option value="breakfast">Breakfast</option>
+                    <option value="lunch">Lunch</option>
+                    <option value="dinner">Dinner</option>
+                </select>
 
-        <button type="submit">Add Meal</button>
-      </form>
-    </section>
-  </main>
+                <label for="mealName">Recipe:</label>
+                <input type="text" id="mealName" name="mealName" placeholder="Enter recipe name" required>
 
-  <footer>
-    <p>&copy; 2026 PantryPages</p>
-  </footer>
+                <button type="submit">Add Meal</button>
+            </form>
 
-  <script src="script.js"></script>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Pantry Pages. All rights reserved.</p>
+    </footer>
+    
+    <script src="scripts.js"></script>
+
 </body>
-</html>
+</html>                                                                                        
 
