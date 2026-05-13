@@ -51,13 +51,18 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     if(filtered.length === 0) {
-        const li = document.createElement('li')
-        li.innerHTML = <h3>${r.name}</h3><p>${r.ingredients}</p><p>${r.instructions}</p>
-        recipeList.appendChild(li)
+        recipeList.innerHTML = '<li>No recipes found</li>'
+        return
     }
 
-    //Planner Logic
+    filtered.forEach(recipe => {
+        const li = document.createElement('li')
+        li.innerHTML = `<h3>${recipe.name}</h3><p>${recipe.ingredients}</p><p>${recipe.instructions}</p>`
+        recipeList.appendChild(li)
+    })
     
+    //Planner Logic
+
 
         
         
