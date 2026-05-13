@@ -60,8 +60,18 @@ document.addEventListener("DOMContentLoaded", () => {
         li.innerHTML = `<h3>${recipe.name}</h3><p>${recipe.ingredients}</p><p>${recipe.instructions}</p>`
         recipeList.appendChild(li)
     })
-    
+
     //Planner Logic
+    const mealPlan = document.getElementById('mealPlan')
+    const planButton = document,getElementById('addMealPlan')
+
+    function populateMealPlan() {
+        if(!mealPlan) return
+        if(recipes.length === 0) {
+            mealPlan.innerHTML = '<li>No recipes yet...Add some dawg!</li>'
+            return
+        }
+    }
 
 
         
