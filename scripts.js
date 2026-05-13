@@ -63,7 +63,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //Planner Logic
     const mealPlan = document.getElementById('mealPlan')
-    const planButton = document,getElementById('addMealPlan')
+    const planButton = document.getElementById('addMealPlan')
 
     function populateMealPlan() {
         if(!mealPlan) return
@@ -72,6 +72,41 @@ document.addEventListener("DOMContentLoaded", () => {
             return
         }
     }
+
+    //Example
+    recipes.forEach(recipe => {
+        const daySlots = ['mon-breakfast','tue-lunch','wed-dinner','thu-breakfast','fri-lunch','sat-dinner','sun-breakfast']
+        const slotId = daySlots[i % daySlots.length]
+        const slot = document.getElementById(slotId)
+        if(slot) slot.textContent = recipe.name
+        })
+    }
+
+
+    if (mealPlan) {
+        populateMealPlan()
+    }
+
+    if (addMealForm) {
+        addMealForm.addEventListener('submit', (e) => {
+            e.preventDefault()
+            const day = document.getElementById('day').value
+            const mealType = document.getElementById('mealType').value.toLowerCase()
+            const mealName = document.getElementById('mealName').value.trim()
+
+            if (!mealName) {
+                alert('Enter a recipe name')
+                return
+            }
+            const slotId = '${day.slice(0,3).toLowerCase()}-${mealType}'
+            const slot = document.getElementById(slotId)
+            if (slot) slot.textContent = mealName
+            alert('Meal Plan Updated!')
+            e.target.reset()
+        })
+        
+    }
+})
 
 
         
