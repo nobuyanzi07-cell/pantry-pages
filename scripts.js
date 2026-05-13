@@ -37,6 +37,28 @@ document.addEventListener("DOMContentLoaded", () => {
          })
     }
 
+    //Gallery logic
+    const recipeList = document.getElementById('recipes') // matching <ul id="recipes">
+    const filterInput = document.getElementById('filterInput')
+
+    function displayRecipe(filter = '') {
+        if(!recipeList) return
+        recipeList.innerHTML = ''
+        const storedRecipes = JSON.parse(localStorage.getItem('recipes')) || []
+        const filtered = storedRecipes.filter(r =>
+            r.ingredients.toLowerCase().includes(filter.toLowerCase())
+        )
+    }
+
+    if(filtered.length === 0) {
+        const li = document.createElement('li')
+        li.innerHTML = <h3>${r.name}</h3><p>${r.ingredients}</p><p>${r.instructions}</p>
+        recipeList.appendChild(li)
+    }
+
+    //Planner Logic
+    
+
         
         
 
