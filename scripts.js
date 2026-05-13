@@ -1,114 +1,127 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Recipe Constructor
-    function Recipe(name, ingredients, instructions) {
-        this.name = name
-        this.ingredients = ingredients
-        this.instructions = instructions
-    }
-    Recipe.prototype.summary = function() {
-        return `${this.name} - Ingredients: ${this.ingredients}`
-    }
+  // Recipe Constructor
+  function Recipe(name, ingredients, instructions) {
+    this.name = name;
+    this.ingredients = ingredients;
+    this.instructions = instructions;
+  }
 
-    // Shared Data
-    const recipes = JSON.parse(localStorage.getItem("recipes")) || []
+  Recipe.prototype.summary = function () {
+    return `${this.name} - Ingredients: ${this.ingredients}`;
+  };
 
-    // Add Recipe Logic
-    const recipeForm = document.getElementById("recipeForm");
-    if (recipeForm) {
-        recipeForm.addEventListener("submit", (e) => {
-            e.preventDefault()
-            const name = document.getElementById("name").value.trim()
-            const ingredients = document.getElementById("ingredients").value.trim()
-            const instructions = document.getElementById("instructions").value.trim()
+  // Shared Data
+  const recipes = JSON.parse(localStorage.getItem("recipes")) || [];
 
-            if (!name || !ingredients || !instructions) {
-                alert("Fill in Required Fields")
-                return;
-            }
+  // Add Recipe Logic
+  const recipeForm = document.getElementById("recipeForm");
+  if (recipeForm) {
+    recipeForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-            const recipe = new Recipe(name, ingredients, instructions)
-            recipes.push(recipe)
-            localStorage.setItem("recipes", JSON.stringify(recipes))
+      const name = document.getElementById("recipeName").value.trim();
+      const ingredients = document.getElementById("ingredients").value.trim();
+      const instructions = document.getElementById("instructions").value.trim();
 
-            alert("Recipe Added 🎊🎉")
-            e.target.reset()
-        })
-    }
+      if (!name || !ingredients || !instructions) {
+        alert("Fill in Required Fields");
+        return;
+      }
 
-    // Gallery Logic
-    const recipeList = document.getElementById("recipes") // matching <ul id="recipes">
-    const filterInput = document.getElementById("filterInput")
+      const recipe = new Recipe(name, ingredients, instructions);
+      recipes.push(recipe);
+      localStorage.setItem("recipes", JSON.stringify(recipes));
 
-    function displayRecipe(filter = "") {
-        if (!recipeList) return
-        recipeList.innerHTML = ""
-        const storedRecipes = JSON.parse(localStorage.getItem("recipes")) || []
-        const filtered = storedRecipes.filter(r =>
-            r.ingredients.toLowerCase().includes(filter.toLowerCase())
-        )
+      alert("Recipe Added 🎊🎉");
+      e.target.reset();
+    });
+  }
 
-        if (filtered.length === 0) {
-            recipeList.innerHTML = "<li>No recipes found</li>"
-            return
-        }
+  // Gallery Logic
+  const recipeList = document.getElementById("recipes");
+  const filterInput = document.getElementById("filterInput");
 
-        filtered.forEach(recipe => {
-            const li = document.createElement("li")
-            li.innerHTML = `<h3>${recipe.name}</h3><p>${recipe.ingredients}</p><p>${recipe.instructions}</p>`
-            recipeList.appendChild(li)
-        })
+  function displayRecipe(filter = "") {
+    if (!recipeList) return;
+
+    recipeList.innerHTML = "";
+    const storedRecipes = JSON.parse(localStorage.getItem("recipes")) || [];
+
+    const filtered = storedRecipes.filter((r) =>
+      r.ingredients.toLowerCase().includes(filter.toLowerCase())
+    );
+
+    if (filtered.length === 0) {
+      recipeList.innerHTML = "<li>No recipes found</li>";
+      return;
     }
 
-    if (filterInput) {
-        filterInput.addEventListener("input", e => displayRecipe(e.target.value));
-        displayRecipe()
+    filtered.forEach((recipe) => {
+      const li = document.createElement("li");
+      li.innerHTML = `<h3>${recipe.name}</h3><p>${recipe.ingredients}</p><p>${recipe.instructions}</p>`;
+      recipeList.appendChild(li);
+    });
+  }
+
+  if (filterInput) {
+    filterInput.addEventListener("input", (e) => displayRecipe(e.target.value));
+    displayRecipe();
+  }
+
+  // Planner Logic
+  const mealPlan = document.getElementById("mealPlan");
+  const addMealForm = document.getElementById("addMealForm");
+
+  function populateMealPlan() {
+    if (!mealPlan) return;
+
+    if (recipes.length === 0) {
+      mealPlan.innerHTML = "<p>No recipes yet... Add some dawg!</p>";
+      return;
     }
 
-    // Planner Logic
-    const mealPlan = document.getElementById("mealPlan")
-    const addMealForm = document.getElementById("addMealForm") // matching <form id="addMealForm">
+    // Example auto-population (optional)
+    const daySlots = [
+      "monday-breakfast",
+      "tuesday-lunch",
+      "wednesday-dinner",
+      "thursday-breakfast",
+      "friday-lunch",
+      "saturday-dinner",
+      "sunday-breakfast",
+    ];
 
-    function populateMealPlan() {
-        if (!mealPlan) return
-        if (recipes.length === 0) {
-            mealPlan.innerHTML = "<li>No recipes yet...Add some dawg!</li>"
-            return
-        }
+    recipes.forEach((recipe, i) => {
+      const slotId = daySlots[i % daySlots.length];
+      const slot = document.getElementById(slotId);
+      if (slot) slot.textContent = recipe.name;
+    });
+  }
 
-        const daySlots = [
-            "mon-breakfast", "tue-lunch", "wed-dinner",
-            "thu-breakfast", "fri-lunch", "sat-dinner", "sun-breakfast"
-        ]
+  if (mealPlan) {
+    populateMealPlan();
+  }
 
-        recipes.forEach((recipe, i) => {
-            const slotId = daySlots[i % daySlots.length]
-            const slot = document.getElementById(slotId)
-            if (slot) slot.textContent = recipe.name
-        })
-    }
+  if (addMealForm) {
+    addMealForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    if (mealPlan) {
-        populateMealPlan()
-    }
+      const day = document.getElementById("day").value;
+      const mealType = document.getElementById("mealType").value.toLowerCase();
+      const mealName = document.getElementById("mealName").value.trim();
 
-    if (addMealForm) {
-        addMealForm.addEventListener("submit", (e) => {
-            e.preventDefault()
-            const day = document.getElementById("day").value
-            const mealType = document.getElementById("mealType").value.toLowerCase()
-            const mealName = document.getElementById("mealName").value.trim()
+      if (!mealName) {
+        alert("Enter a recipe name");
+        return;
+      }
 
-            if (!mealName) {
-                alert("Enter a recipe name")
-                return;
-            }
+      const slotId = `${day}-${mealType}`; // matches planner.html IDs
+      const slot = document.getElementById(slotId);
 
-            const slotId = `${day.slice(0, 3).toLowerCase()}-${mealType}`
-            const slot = document.getElementById(slotId)
-            if (slot) slot.textContent = mealName
+      if (slot) slot.textContent = mealName;
 
-            alert("Meal Plan Updated!")
-            e.target.reset()
-        })
-    }
-})
+      alert("Meal Plan Updated!");
+      e.target.reset();
+    });
+  }
+});
