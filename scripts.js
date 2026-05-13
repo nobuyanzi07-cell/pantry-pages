@@ -80,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    // Example auto-population (optional)
+    // Example 
     const daySlots = [
       "monday-breakfast",
       "tuesday-lunch",
