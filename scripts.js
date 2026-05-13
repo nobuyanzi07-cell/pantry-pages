@@ -1,116 +1,114 @@
 document.addEventListener("DOMContentLoaded", () => {
-    //Recipe Constructor
-    function Recipe(name,ingredients,instructions) {
+    // Recipe Constructor
+    function Recipe(name, ingredients, instructions) {
         this.name = name
         this.ingredients = ingredients
         this.instructions = instructions
     }
     Recipe.prototype.summary = function() {
-        return '${this.name} - Ingredients: ${this.ingredients}'
+        return `${this.name} - Ingredients: ${this.ingredients}`
     }
 
-    //Shared Data
-    const recipes = JSON.parse(localStorage.getItem('recipes')) || []
+    // Shared Data
+    const recipes = JSON.parse(localStorage.getItem("recipes")) || []
 
-    //Add Recipe Logic
-    const recipeForm = document.getElementById('recipeForm')
-
+    // Add Recipe Logic
+    const recipeForm = document.getElementById("recipeForm");
     if (recipeForm) {
-        recipeForm.addEventListener('submit', (e) => {
+        recipeForm.addEventListener("submit", (e) => {
             e.preventDefault()
-            const name = document.getElementById('name').value.trim()
-            const ingredients = document.getElementById('ingredients').value.trim()
-            const instructions = document.getElementById('instructions').value.trim()
+            const name = document.getElementById("name").value.trim()
+            const ingredients = document.getElementById("ingredients").value.trim()
+            const instructions = document.getElementById("instructions").value.trim()
 
             if (!name || !ingredients || !instructions) {
-                alert('Fill in Required Fields')
-                return
+                alert("Fill in Required Fields")
+                return;
             }
 
-            const recipe = new Recipe(name,ingredients,instructions)
+            const recipe = new Recipe(name, ingredients, instructions)
             recipes.push(recipe)
-            localStorage.setItem('recipes', JSON.stringify(recipes))
+            localStorage.setItem("recipes", JSON.stringify(recipes))
 
-            alert('Recipe Added 🎊🎉')
-
+            alert("Recipe Added 🎊🎉")
             e.target.reset()
-         })
-    }
-
-    //Gallery logic
-    const recipeList = document.getElementById('recipes') // matching <ul id="recipes">
-    const filterInput = document.getElementById('filterInput')
-
-    function displayRecipe(filter = '') {
-        if(!recipeList) return
-        recipeList.innerHTML = ''
-        const storedRecipes = JSON.parse(localStorage.getItem('recipes')) || []
-        const filtered = storedRecipes.filter(r =>
-            r.ingredients.toLowerCase().includes(filter.toLowerCase())
-        )
-    }
-
-    if(filtered.length === 0) {
-        recipeList.innerHTML = '<li>No recipes found</li>'
-        return
-    }
-
-    filtered.forEach(recipe => {
-        const li = document.createElement('li')
-        li.innerHTML = `<h3>${recipe.name}</h3><p>${recipe.ingredients}</p><p>${recipe.instructions}</p>`
-        recipeList.appendChild(li)
-    })
-
-    //Planner Logic
-    const mealPlan = document.getElementById('mealPlan')
-    const planButton = document.getElementById('addMealPlan')
-
-    function populateMealPlan() {
-        if(!mealPlan) return
-        if(recipes.length === 0) {
-            mealPlan.innerHTML = '<li>No recipes yet...Add some dawg!</li>'
-            return
-        }
-    }
-
-    //Example
-    recipes.forEach(recipe => {
-        const daySlots = ['mon-breakfast','tue-lunch','wed-dinner','thu-breakfast','fri-lunch','sat-dinner','sun-breakfast']
-        const slotId = daySlots[i % daySlots.length]
-        const slot = document.getElementById(slotId)
-        if(slot) slot.textContent = recipe.name
         })
     }
 
+    // Gallery Logic
+    const recipeList = document.getElementById("recipes") // matching <ul id="recipes">
+    const filterInput = document.getElementById("filterInput")
+
+    function displayRecipe(filter = "") {
+        if (!recipeList) return
+        recipeList.innerHTML = ""
+        const storedRecipes = JSON.parse(localStorage.getItem("recipes")) || []
+        const filtered = storedRecipes.filter(r =>
+            r.ingredients.toLowerCase().includes(filter.toLowerCase())
+        )
+
+        if (filtered.length === 0) {
+            recipeList.innerHTML = "<li>No recipes found</li>"
+            return
+        }
+
+        filtered.forEach(recipe => {
+            const li = document.createElement("li")
+            li.innerHTML = `<h3>${recipe.name}</h3><p>${recipe.ingredients}</p><p>${recipe.instructions}</p>`
+            recipeList.appendChild(li)
+        })
+    }
+
+    if (filterInput) {
+        filterInput.addEventListener("input", e => displayRecipe(e.target.value));
+        displayRecipe()
+    }
+
+    // Planner Logic
+    const mealPlan = document.getElementById("mealPlan")
+    const addMealForm = document.getElementById("addMealForm") // matching <form id="addMealForm">
+
+    function populateMealPlan() {
+        if (!mealPlan) return
+        if (recipes.length === 0) {
+            mealPlan.innerHTML = "<li>No recipes yet...Add some dawg!</li>"
+            return
+        }
+
+        const daySlots = [
+            "mon-breakfast", "tue-lunch", "wed-dinner",
+            "thu-breakfast", "fri-lunch", "sat-dinner", "sun-breakfast"
+        ]
+
+        recipes.forEach((recipe, i) => {
+            const slotId = daySlots[i % daySlots.length]
+            const slot = document.getElementById(slotId)
+            if (slot) slot.textContent = recipe.name
+        })
+    }
 
     if (mealPlan) {
         populateMealPlan()
     }
 
     if (addMealForm) {
-        addMealForm.addEventListener('submit', (e) => {
+        addMealForm.addEventListener("submit", (e) => {
             e.preventDefault()
-            const day = document.getElementById('day').value
-            const mealType = document.getElementById('mealType').value.toLowerCase()
-            const mealName = document.getElementById('mealName').value.trim()
+            const day = document.getElementById("day").value
+            const mealType = document.getElementById("mealType").value.toLowerCase()
+            const mealName = document.getElementById("mealName").value.trim()
 
             if (!mealName) {
-                alert('Enter a recipe name')
-                return
+                alert("Enter a recipe name")
+                return;
             }
-            const slotId = '${day.slice(0,3).toLowerCase()}-${mealType}'
+
+            const slotId = `${day.slice(0, 3).toLowerCase()}-${mealType}`
             const slot = document.getElementById(slotId)
             if (slot) slot.textContent = mealName
-            alert('Meal Plan Updated!')
+
+            alert("Meal Plan Updated!")
             e.target.reset()
         })
-        
     }
 })
-
-
-        
-        
-
-
-           
