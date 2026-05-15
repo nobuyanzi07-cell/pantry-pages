@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
+
   // Recipe Constructor
   function Recipe(name, ingredients, instructions) {
     this.name = name
@@ -102,6 +103,8 @@ document.addEventListener("DOMContentLoaded", () => {
     populateMealPlan()
   }
 
+
+// add Meal form Logic
   if (addMealForm) {
     addMealForm.addEventListener("submit", (e) => {
       e.preventDefault()
